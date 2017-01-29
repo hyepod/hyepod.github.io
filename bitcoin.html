@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>GitHub polo <3</title>
+		
+
+		
+	</head>
+		
+	<body>
+
+		<p>
+			Veuillez choisir quel est le fichier dont vous souhaitez voir le contenu :
+		</p>
+
+		<p>
+			<input type="button" value="http://bitcoin.mubiz.com/info" />
+			<input type="button" value="http://bitcoin.mubiz.com/blockchaininfo" />
+		</p>
+
+		<p id="fileContent">
+			<span>Aucun fichier chargé</span>
+		</p>	
+	<script>
+		
+		function loadFile(file){
+		
+		var xhr = new XMLHttpRequest();
+		
+		xhr.open('GET', file);
+		
+		xhr.addEventListener('readystatechange', function(){
+		
+			 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est chargé sans erreur
+
+            document.getElementById('fileContent').innerHTML = '<span>' + xhr.responseText + '</span>'; // Et on affiche !
+
+        }
+
+		});
+
+		xhr.send(null); // La requête est prête, on envoie tout !
+		}
+		(function() { // Comme d'habitude, une IIFE pour éviter les variables globales
+
+    var inputs = document.getElementsByTagName('input'),
+        inputsLen = inputs.length;
+
+    for (var i = 0; i < inputsLen; i++) {
+
+        inputs[i].addEventListener('click', function() {
+            loadFile(this.value); // À chaque clique, un fichier sera chargé dans la page
+        });
+
+    }
+
+})();
+	
+	</script>
+	</body>
+</html>
