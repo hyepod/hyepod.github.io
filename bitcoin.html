@@ -1,28 +1,58 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+	<meta charset="utf-8" />
 		<title>GitHub polo <3</title>
-		
-
-		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	</head>
 		
 	<body>
-
-		<p>
-			Veuillez choisir quel est le fichier dont vous souhaitez voir le contenu :
-		</p>
-
-		<p>
-			<input type="button" value="http://bitcoin.mubiz.com/info" />
-			<input type="button" value="http://bitcoin.mubiz.com/blockchaininfo" />
-		</p>
-
-		<p id="fileContent">
-			<span>Aucun fichier charg�</span>
-		</p>	
+	<!-- NavBar !-->
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <a class="navbar-brand" href="index.html">Paul & Hippo</a>
+		</div>
+		<ul class="nav navbar-nav">
+		  <li><a href="index.html">Index</a></li>
+		  <li class="active"><a href="bitcoin.html">BitCoin</a></li>
+		</ul>
+	  </div>
+	</nav>
+	
+	
+	
+		<div class="row text-center">
+		<h3> Veuillez séléctionner votre choix :</h3>
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4 text-left">
+				<div style="padding-bottom:15px;">
+					<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/info" />
+				</div>
+				<div style="padding-bottom:15px;">
+				<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/blockchaininfo" />
+				</div>
+				<div style="padding-bottom:15px;">
+				<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/mininginfo" />
+				</div>
+				<div style="padding-bottom:15px;">
+				<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/peerinfo" />
+				</div>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+		
+		<div class="row text-center">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
+				<h3>Résultat de la requète : </h3>
+				<p id="fileContent">
+					<span>Aucun fichier chargé</span>
+				</p>
+			</div>
+			<div class="col-sm-3"></div>
+		</div>
 	<script>
 		
 		function loadFile(file){
