@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+	<head>
+	<meta charset="utf-8" />
+		<title>Finance</title>
+		<!-- Feuille de style mise en page/forme -->
+		<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+		<link rel="stylesheet" href="styles/style_basique.css" type="text/css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+		
+	<body>
+	
+	<!-- NavBar !-->
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <a class="navbar-brand" href="index.html">Paul & Hippo</a>
+		</div>
+		<ul class="nav navbar-nav">
+		  <li><a href="../../index.html">Index</a></li>
+		  <li class="dropdown">
+			<a class="dropdown-toggle active" data-toggle="dropdown" href="#">BitCoin
+			<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li><a href="../index.html">TD1</a></li>
+				<li><a href="index.html">Explorer</a></li>
+			</ul>
+		  </li>
+		</ul>
+	  </div>
+	</nav>
+	
+	<!-- Corps de la page -->
+	<div class="container-fluid text-center">
+	  <h2>Formulaire</h2>
+	  <form class="form-horizontal">
+		<div class="form-group">
+		  <label class="control-label col-sm-2" for="requete">Requête:</label>
+		  <div class="col-sm-10">
+			<input type="text" class="form-control" id="requete" placeholder="Entrer requête">
+		  </div>
+		</div>
+		<div class="form-group">        
+		  <div class="col-sm-offset-2 col-sm-10">
+			<button id="valider"  class="btn btn-default">Valider</button>
+		  </div>
+		</div>
+	</form>
+	
+		<div class="row text-center">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
+				<h3>Résultat de la requète : </h3>
+				<pre  class="text-left">
+					<code id="fileContent">Aucun fichier chargé</code>
+				</pre>
+			</div>
+			<div class="col-sm-3"></div>
+		</div>
+  </div>
+	<script>
+		(function() { // Comme d'habitude, une IIFE pour éviter les variables globales
+
+		var valider = document.getElementById("valider");
+		var requete = document.getElementById("requete").value;
+		alert(requete);
+        valider.addEventListener('click', function() {
+            loadFile(requete); // à chaque clique, un fichier sera chargé dans la page
+        });)
+
+	function loadFile(file){
+		
+		var xhr = new XMLHttpRequest();
+		
+		xhr.open('GET', file);
+		
+		
+		xhr.addEventListener('readystatechange', function(){
+		
+			 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est chargé sans erreur
+
+			 var myObj = xhr.responseText; // on récupère le résultat de la requête
+			 var jsonPretty = JSON.stringify(JSON.parse(myObj),null,2); // on parse le résultat de la requête
+             document.getElementById('fileContent').innerHTML =  jsonPretty ; // on affiche
+
+        }
+
+		});
+
+		xhr.send(null); // La requête est prête, on envoie tout !
+		}
+		
+		
+	</script>
+	</body>
+</html>

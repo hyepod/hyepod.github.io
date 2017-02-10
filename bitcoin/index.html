@@ -6,14 +6,13 @@
 		<!-- Feuille de style mise en page/forme -->
 		<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 		<link rel="stylesheet" href="styles/style_basique.css" type="text/css">
-		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	</head>
 		
 	<body>
 	
-	<?php require "navBar.html"; ?>
-
 	<!-- NavBar !-->
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
@@ -21,8 +20,15 @@
 		  <a class="navbar-brand" href="index.html">Paul & Hippo</a>
 		</div>
 		<ul class="nav navbar-nav">
-		  <li><a href="index.html">Index</a></li>
-		  <li class="active"><a href="bitcoin.html">BitCoin</a></li>
+		  <li><a href="../index.html">Index</a></li>
+		  <li class="dropdown">
+			<a class="dropdown-toggle active" data-toggle="dropdown" href="#">BitCoin
+			<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li><a href="index.html">TD1</a></li>
+				<li><a href="explorer/index.html">Explorer</a></li>
+			</ul>
+		  </li>
 		</ul>
 	  </div>
 	</nav>
