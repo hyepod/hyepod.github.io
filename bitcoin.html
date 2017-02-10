@@ -2,12 +2,16 @@
 <html lang="fr">
 	<head>
 	<meta charset="utf-8" />
-		<title>GitHub polo <3</title>
-		<!-- Latest compiled and minified CSS -->
+		<title>Finance</title>
+		<!-- Feuille de style mise en page/forme -->
+		<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+		<link rel="stylesheet" href="styles/style_basique.css" type="text/css">
+		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	</head>
 		
 	<body>
+	
 	<!-- NavBar !-->
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
@@ -21,35 +25,34 @@
 	  </div>
 	</nav>
 	
-	
-	
-		<div class="row text-center">
-		<h3> Veuillez séléctionner votre choix :</h3>
-			<div class="col-sm-4"></div>
-			<div class="col-sm-4 text-left">
-				<div style="padding-bottom:15px;">
-					<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/info" />
-				</div>
-				<div style="padding-bottom:15px;">
-				<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/blockchaininfo" />
-				</div>
-				<div style="padding-bottom:15px;">
-				<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/mininginfo" />
-				</div>
-				<div style="padding-bottom:15px;">
-				<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/peerinfo" />
-				</div>
+	<!-- Corps de la page -->
+	<div class="row text-center">
+	<h3> Veuillez séléctionner votre choix :</h3>
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4 text-left">
+			<div class="buttonChoose">
+				<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/info" />
 			</div>
-			<div class="col-sm-4"></div>
+			<div class="buttonChoose">
+				<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/blockchaininfo" />
+			</div>
+			<div class="buttonChoose">
+				<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/mininginfo" />
+			</div>
+			<div class="buttonChoose">
+				<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/peerinfo" />
+			</div>
 		</div>
+		<div class="col-sm-4"></div>
+	</div>
 		
 		<div class="row text-center">
 			<div class="col-sm-3"></div>
 			<div class="col-sm-6">
 				<h3>Résultat de la requète : </h3>
-				<p id="fileContent">
-					<span>Aucun fichier chargé</span>
-				</p>
+				<pre  class="text-left">
+					<code id="fileContent">Aucun fichier chargé</code>
+				</pre>
 			</div>
 			<div class="col-sm-3"></div>
 		</div>
@@ -63,17 +66,19 @@
 		
 		xhr.addEventListener('readystatechange', function(){
 		
-			 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est charg� sans erreur
+			 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est chargé sans erreur
 
-            document.getElementById('fileContent').innerHTML = '<span>' + xhr.responseText + '</span>'; // Et on affiche !
+			 var myObj = xhr.responseText; // on récupère le résultat de la requête
+			 var jsonPretty = JSON.stringify(JSON.parse(myObj),null,2); // on parse le résultat de la requête
+             document.getElementById('fileContent').innerHTML =  jsonPretty ; // on affiche
 
         }
 
 		});
 
-		xhr.send(null); // La requ�te est pr�te, on envoie tout !
+		xhr.send(null); // La requête est prête, on envoie tout !
 		}
-		(function() { // Comme d'habitude, une IIFE pour �viter les variables globales
+		(function() { // Comme d'habitude, une IIFE pour éviter les variables globales
 
     var inputs = document.getElementsByTagName('input'),
         inputsLen = inputs.length;
@@ -81,7 +86,7 @@
     for (var i = 0; i < inputsLen; i++) {
 
         inputs[i].addEventListener('click', function() {
-            loadFile(this.value); // � chaque clique, un fichier sera charg� dans la page
+            loadFile(this.value); // à chaque clique, un fichier sera chargé dans la page
         });
 
     }
