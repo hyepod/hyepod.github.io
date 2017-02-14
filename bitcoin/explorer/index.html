@@ -37,33 +37,33 @@
 	<div class="container-fluid text-center">
 	  <h2>Requête</h2>
 	  <div>
-		<div class="">
+		<div class="form-group">
 		  <label class="control-label col-sm-3" for="adresse">Adresse</label>
 		  <div class="col-sm-6">
-			<input type="text" id="adresse" placeholder="Entrer une adresse">
+			<input type="text" class="form-control" id="adresse" placeholder="Entrer une adresse">
 		  </div>
 		  <div class="text-left col-sm-3"> <button id="valider1"  class="btn btn-default">Valider</button> </div>
 		</div>
-		<div class="">
+		<div class="form-group">
 		  <label class="control-label col-sm-3" for="hashTransaction">Hash de transaction</label>
 		  <div class="col-sm-6">
 			<input type="text" class="form-control" id="hashTransaction" placeholder="Entrer un hash de transaction">
 		  </div>
-		  <div class="text-left col-sm-3"> <button id="valider"  class="btn btn-default">Valider</button> </div>
+		  <div class="text-left col-sm-3"> <button id="valider2"  class="btn btn-default">Valider</button> </div>
 		</div>
 		<div class="form-group">
 		  <label class="control-label col-sm-3" for="hashBloc">Hash d'un bloc</label>
 		  <div class="col-sm-6">
 			<input type="text" class="form-control" id="hashBloc" placeholder="Entrer un hash d'un bloc">
 		  </div>
-		  <div class="text-left col-sm-3"> <button id="valider"  class="btn btn-default">Valider</button> </div>
+		  <div class="text-left col-sm-3"> <button id="valider3"  class="btn btn-default">Valider</button> </div>
 		</div>
 		<div class="form-group">
 		  <label class="control-label col-sm-3" for="numeroBloc">Index (numéro) d'un bloc</label>
 		  <div class="col-sm-6">
 			<input type="text" class="form-control" id="numeroBloc" placeholder="Entrer un numéro d'un bloc">
 		  </div>
-		  <div class="text-left col-sm-3"> <button id="valider"  class="btn btn-default">Valider</button> </div>
+		  <div class="text-left col-sm-3"> <button id="valider4"  class="btn btn-default">Valider</button> </div>
 		</div>
 	   </div>
 	
@@ -79,16 +79,17 @@
 		</div>
   </div>
 	<script>
-		
-
-		var valider = document.getElementById("valider1");
 		var requete = "";
+		var valider1 = document.getElementById("valider1");
+		var valider2 = document.getElementById("valider2");
+		var valider3 = document.getElementById("valider3");
+		var valider4 = document.getElementById("valider4");
+
 		
-        valider.addEventListener('click', function() {
-		requete = document.getElementById("adresse").value;
-		//alert(requete);
-            loadFile(requete); // à chaque clique, un fichier sera chargé dans la page
-        })
+        valider1.addEventListener('click', function() { requete = document.getElementById("adresse").value; loadFile(requete); })
+        valider2.addEventListener('click', function() { requete = document.getElementById("adresse").value; loadFile(requete); })
+        valider3.addEventListener('click', function() { requete = document.getElementById("adresse").value; loadFile(requete); })
+        valider4.addEventListener('click', function() { requete = document.getElementById("adresse").value; loadFile(requete); })
 
 	function loadFile(file){
 		
@@ -97,9 +98,7 @@
 		xhr.open('GET', file);
 		
 		xhr.addEventListener('readystatechange', function(){
-			alert("1");
 			 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est chargé sans erreur
-				alert("2");
 			 var myObj = xhr.responseText; // on récupère le résultat de la requête
 			 var jsonPretty = JSON.stringify(JSON.parse(myObj),null,2); // on parse le résultat de la requête
              document.getElementById('fileContent').innerHTML =  jsonPretty ; // on affiche
