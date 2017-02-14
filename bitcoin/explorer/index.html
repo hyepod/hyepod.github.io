@@ -97,9 +97,9 @@
 		xhr.open('GET', file);
 		
 		xhr.addEventListener('readystatechange', function(){
-
+			alert("1");
 			 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est chargé sans erreur
-
+				alert("2");
 			 var myObj = xhr.responseText; // on récupère le résultat de la requête
 			 var jsonPretty = JSON.stringify(JSON.parse(myObj),null,2); // on parse le résultat de la requête
              document.getElementById('fileContent').innerHTML =  jsonPretty ; // on affiche
