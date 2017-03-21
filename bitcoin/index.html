@@ -39,16 +39,16 @@
 		<div class="col-sm-4"></div>
 		<div class="col-sm-4 text-left">
 			<div class="buttonChoose">
-				<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/info" />
+				<input type="button" class="btn btn-primary" value="https://bitcoin.mubiz.com/info" />
 			</div>
 			<div class="buttonChoose">
-				<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/blockchaininfo" />
+				<input type="button" class="btn btn-primary" value="https://bitcoin.mubiz.com/blockchaininfo" />
 			</div>
 			<div class="buttonChoose">
-				<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/mininginfo" />
+				<input type="button" class="btn btn-primary" value="https://bitcoin.mubiz.com/mininginfo" />
 			</div>
 			<div class="buttonChoose">
-				<input type="button" class="btn btn-primary" value="http://bitcoin.mubiz.com/peerinfo" />
+				<input type="button" class="btn btn-primary" value="https://bitcoin.mubiz.com/peerinfo" />
 			</div>
 		</div>
 		<div class="col-sm-4"></div>
@@ -75,7 +75,6 @@
 		xhr.addEventListener('readystatechange', function(){
 		
 			 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est chargé sans erreur
-
 			 var myObj = xhr.responseText; // on récupère le résultat de la requête
 			 var jsonPretty = JSON.stringify(JSON.parse(myObj),null,2); // on parse le résultat de la requête
              document.getElementById('fileContent').innerHTML =  jsonPretty ; // on affiche

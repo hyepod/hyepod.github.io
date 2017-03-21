@@ -5,7 +5,7 @@
 		<title>Finance</title>
 		<!-- Feuille de style mise en page/forme -->
 		<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-		<link rel="stylesheet" href="styles/style_basique.css" type="text/css">
+		<link rel="stylesheet" href="../../styles/style_basique.css" type="text/css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -88,20 +88,20 @@
 		var isAddress = /^[0-9a-zA-Z]{34}$/.test(code);
 		if(isAddress == true)
 		{
-			var requete = "https://blockchain.info/fr/address/" + code + "?format=json"; 
+			var requete = "https://bitcoin.mubiz.com/address/"  + code + "/"; 
 			loadFile(requete);
 		}})
         valider2.addEventListener('click', function() { 
 		var code = document.getElementById("hashTransaction").value;
-		var requete = "https://blockchain.info/fr/rawtx/" + code ;
+		var requete = "https://bitcoin.mubiz.com/transaction/" + code + "/";
 		loadFile(requete); })
         valider3.addEventListener('click', function() { 
 		var code = document.getElementById("hashBloc").value;
-		var requete = "https://blockchain.info/fr/rawblock/" + code ;
+		var requete = "https://bitcoin.mubiz.com/block_hash/" + code + "/" ;
 		loadFile(requete); })
         valider4.addEventListener('click', function() {
 		var code = document.getElementById("numeroBloc").value;
-		var requete = "http://bitcoin.mubiz.com/block_index/" + code + "/";
+		var requete = "https://bitcoin.mubiz.com/block_index/" + code + "/";
 		loadFile(requete); })
 
 	function loadFile(file){
@@ -111,11 +111,13 @@
 			xhr.open('GET', file);
 			
 			xhr.addEventListener('readystatechange', function(){
-				 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est chargé sans erreur
-alert("ca cherche");				
+				 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est chargé sans erreur				
 				var myObj = xhr.responseText; // on récupère le résultat de la requête
 				 var jsonPretty = JSON.stringify(JSON.parse(myObj),null,2); // on parse le résultat de la requête
-				 document.getElementById('fileContent').innerHTML =  jsonPretty ; // on affiche
+				 
+				 
+				//output(syntaxHighlight(jsonPretty));
+				 document.getElementById('fileContent').innerHTML =  syntaxHighlight(jsonPretty) ; // on affiche
 
 			}
 
@@ -124,6 +126,32 @@ alert("ca cherche");
 			xhr.send(null); // La requête est prête, on envoie tout !
 		}
 		
+		/* PARTIE 2 */ 
+		
+		function output(inp) {
+			document.body.appendChild(document.createElement('pre')).innerHTML = inp;
+		}
+
+
+function syntaxHighlight(json) {
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
+}
+
 		
 	</script>
 	</body>
